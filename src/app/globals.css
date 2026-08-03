@@ -165,19 +165,6 @@ a { color: inherit; text-decoration: none; }
   100% { background-position: 56px 0; }
 }
 
-/* Animations */
-@keyframes spin { to { transform: rotate(360deg); } }
-.animate-spin { animation: spin 0.8s linear infinite; }
-
-@keyframes crazyPulse {
-  0% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.1) rotate(-5deg); }
-  50% { transform: scale(1) rotate(0deg); }
-  75% { transform: scale(1.1) rotate(5deg); }
-  100% { transform: scale(1) rotate(0deg); }
-}
-.crazy-pulse { animation: crazyPulse 1.5s infinite; }
-
 /* Banana Rain System */
 .banana-rain-container {
   position: fixed;
@@ -203,36 +190,6 @@ a { color: inherit; text-decoration: none; }
   0% { transform: translateY(-100px) rotate(0deg) scale(0.8); }
   50% { transform: translateY(50vh) rotate(360deg) scale(1.2); }
   100% { transform: translateY(110vh) rotate(720deg) scale(0.8); }
-}
-
-/* Monkey Car */
-.monkey-car {
-  position: fixed;
-  bottom: 20px;
-  left: -300px;
-  font-size: 8rem;
-  z-index: 1000;
-  pointer-events: none;
-  filter: drop-shadow(0 10px 10px rgba(0,0,0,0.8));
-  transition: all 0.5s;
-}
-
-.monkey-car.driving {
-  animation: driveMonkey 4s linear infinite;
-}
-
-@keyframes driveMonkey {
-  0% { transform: translateX(-100px) rotate(-10deg); }
-  10% { transform: translateX(10vw) rotate(10deg); }
-  20% { transform: translateX(20vw) rotate(-10deg); }
-  30% { transform: translateX(30vw) rotate(10deg); }
-  40% { transform: translateX(40vw) rotate(-10deg); }
-  50% { transform: translateX(50vw) rotate(10deg); }
-  60% { transform: translateX(60vw) rotate(-10deg); }
-  70% { transform: translateX(70vw) rotate(10deg); }
-  80% { transform: translateX(80vw) rotate(-10deg); }
-  90% { transform: translateX(90vw) rotate(10deg); }
-  100% { transform: translateX(120vw) rotate(-10deg); }
 }
 
 /* Layout */

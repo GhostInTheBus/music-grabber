@@ -129,11 +129,6 @@ export default function Home() {
     <>
       <BananaRain active={isDownloading} />
       
-      {/* THE MONKEY CAR */}
-      <div className={`monkey-car ${isDownloading ? 'driving' : ''}`}>
-        🚗🦍💨
-      </div>
-      
       <main className="container">
         <div style={{ textAlign: 'center', marginBottom: '4rem', marginTop: '1.5rem', position: 'relative' }}>
           
@@ -223,7 +218,7 @@ export default function Home() {
 
                 <button 
                   type="submit" 
-                  className="button-primary crazy-pulse" 
+                  className="button-primary" 
                   disabled={!query.trim()} 
                   style={{ width: '100%', marginTop: '1.5rem', padding: '24px' }}
                 >
