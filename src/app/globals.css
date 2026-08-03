@@ -24,8 +24,10 @@ body {
   font-family: 'Outfit', sans-serif;
   background-color: var(--bg-color);
   background-image: 
-    repeating-radial-gradient(circle at center, transparent 0, rgba(0,0,0,0.2) 50px),
-    var(--bg-gradient);
+    linear-gradient(rgba(18, 33, 22, 0.8), rgba(10, 20, 13, 0.9)),
+    url('/jungle-bg.jpg');
+  background-size: auto, 500px 500px;
+  background-repeat: no-repeat, repeat;
   background-attachment: fixed;
   color: var(--text-primary);
   min-height: 100vh;
