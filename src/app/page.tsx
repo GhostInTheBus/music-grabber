@@ -67,7 +67,7 @@ export default function Home() {
       query: query.trim(),
       status: 'queued',
       progress: 0,
-      message: 'PRIMATES DEPLOYED! 🦍🚀',
+      message: 'GETTING THE BANANAS! 🍌🚀',
     };
 
     setJobs((prev) => [newJob, ...prev]);
@@ -262,8 +262,8 @@ export default function Home() {
                   disabled={!query.trim()} 
                   style={{ width: '100%', marginTop: '1.5rem', padding: '24px' }}
                 >
-                  <span style={{ display: 'inline-block', fontSize: '2.2rem' }}>🦍</span>
-                  DEPLOY THE PRIMATES!
+                  <span style={{ display: 'inline-block', fontSize: '2.2rem' }}>🍌</span>
+                  GET THE BANANAS!
                 </button>
               </form>
             </div>
