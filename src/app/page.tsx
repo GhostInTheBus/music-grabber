@@ -90,27 +90,26 @@ export default function Home() {
 
   return (
     <main className="container">
-      <div style={{ textAlign: 'center', marginBottom: '3rem', marginTop: '2rem' }}>
+      <div style={{ textAlign: 'center', marginBottom: '3.5rem', marginTop: '2rem' }}>
         <motion.div
-          animate={{ y: [0, -15, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '20px', background: 'var(--primary-glow)', borderRadius: '50%', marginBottom: '1rem', border: '2px solid var(--primary-color)' }}
+          className="animate-swing"
+          style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', padding: '20px', background: 'var(--primary-glow)', borderRadius: '50%', marginBottom: '1.5rem', border: '3px solid var(--primary-color)', boxShadow: '0 5px 15px rgba(0,0,0,0.5)' }}
         >
-          <span style={{ fontSize: '3rem' }}>🍌</span>
+          <span style={{ fontSize: '3.5rem' }}>🐒</span>
         </motion.div>
         <motion.h1
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.1 }}
-          style={{ fontSize: '3.5rem', marginBottom: '1rem', background: 'linear-gradient(90deg, #fff, var(--primary-color))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+          style={{ fontSize: '4rem', marginBottom: '1rem', background: 'linear-gradient(90deg, #fff, var(--primary-color))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textShadow: '2px 2px 0px rgba(0,0,0,0.8)' }}
         >
-          Monkey Grabber 🐒
+          Monkey Grabber 🍌
         </motion.h1>
         <motion.p
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
-          style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto', fontWeight: 500 }}
+          style={{ color: 'var(--text-secondary)', fontSize: '1.25rem', maxWidth: '650px', margin: '0 auto', fontWeight: 500 }}
         >
           Feed the monkeys an artist name or a YouTube link, and they'll swing by with high-quality audio tracks! 🌴
         </motion.p>
@@ -123,11 +122,11 @@ export default function Home() {
           transition={{ delay: 0.3 }}
         >
           <div className="glass-panel" style={{ padding: '2.5rem' }}>
-            <h2 style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.5rem', fontSize: '1.8rem', color: 'var(--primary-color)' }}>
-              <span style={{ fontSize: '1.8rem' }}>🦍</span>
+            <h2 style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.5rem', fontSize: '2rem', color: 'var(--primary-color)' }}>
+              <span style={{ fontSize: '2.2rem' }}>🦍</span>
               New Safari
             </h2>
-            <form onSubmit={handleDownload} className="flex-col" style={{ gap: '1.5rem' }}>
+            <form onSubmit={handleDownload} className="flex-col" style={{ gap: '1.8rem' }}>
               <div>
                 <label style={{ display: 'block', marginBottom: '0.8rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
                   Artist Name or URL
@@ -150,7 +149,7 @@ export default function Home() {
                   value={mode}
                   onChange={(e) => setMode(e.target.value)}
                   className="input-field"
-                  style={{ cursor: 'pointer', appearance: 'none' }}
+                  style={{ appearance: 'none' }}
                 >
                   <option value="single">Single Banana 🍌 (1 Track)</option>
                   <option value="top10">Small Bunch 🍌🍌 (Top 10)</option>
@@ -159,7 +158,7 @@ export default function Home() {
                 </select>
               </div>
 
-              <button type="submit" className="button-primary" disabled={!query.trim()} style={{ width: '100%', marginTop: '1rem', padding: '16px' }}>
+              <button type="submit" className="button-primary" disabled={!query.trim()} style={{ width: '100%', marginTop: '1rem', padding: '18px' }}>
                 <DownloadCloud size={24} />
                 Send Monkeys! 🐒
               </button>
@@ -173,20 +172,21 @@ export default function Home() {
           transition={{ delay: 0.4 }}
         >
           <div className="glass-panel" style={{ padding: '2.5rem', minHeight: '100%' }}>
-            <h2 style={{ marginBottom: '1.5rem', fontSize: '1.8rem', color: 'var(--primary-color)' }}>
+            <h2 style={{ marginBottom: '1.5rem', fontSize: '2rem', color: 'var(--primary-color)' }}>
               Monkey Business 🍌
             </h2>
             
-            <div className="flex-col" style={{ gap: '1rem' }}>
+            <div className="flex-col" style={{ gap: '1.2rem' }}>
               <AnimatePresence>
                 {jobs.length === 0 ? (
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '3rem 2rem', fontWeight: 500 }}
+                    style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '4rem 2rem', fontWeight: 600, fontSize: '1.1rem' }}
                   >
-                    The monkeys are sleeping. Give them a job! 💤🐒
+                    <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>💤🐒</div>
+                    The monkeys are sleeping. Give them a job!
                   </motion.div>
                 ) : (
                   jobs.map((job) => (
@@ -197,25 +197,26 @@ export default function Home() {
                       exit={{ opacity: 0, scale: 0.95 }}
                       style={{
                         background: 'rgba(0,0,0,0.4)',
-                        border: '1px solid var(--glass-border)',
+                        border: '1px solid rgba(255, 230, 0, 0.2)',
                         borderRadius: 'var(--radius-sm)',
-                        padding: '1.2rem',
+                        padding: '1.5rem',
                         position: 'relative',
-                        overflow: 'hidden'
+                        overflow: 'hidden',
+                        boxShadow: 'inset 0 0 10px rgba(0,0,0,0.5)'
                       }}
                     >
                       <div className="flex-between" style={{ marginBottom: '0.8rem' }}>
-                        <span style={{ fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '75%', fontSize: '1.1rem' }}>
+                        <span style={{ fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '75%', fontSize: '1.15rem' }}>
                           {job.query}
                         </span>
                         <span>
-                          {job.status === 'downloading' && <Loader2 size={20} className="animate-spin" color="var(--primary-color)" />}
-                          {job.status === 'completed' && <CheckCircle2 size={20} color="var(--success-color)" />}
-                          {job.status === 'error' && <AlertCircle size={20} color="var(--error-color)" />}
+                          {job.status === 'downloading' && <span className="animate-swing" style={{ display: 'inline-block', fontSize: '1.5rem' }}>🐒</span>}
+                          {job.status === 'completed' && <CheckCircle2 size={24} color="var(--success-color)" />}
+                          {job.status === 'error' && <AlertCircle size={24} color="var(--error-color)" />}
                         </span>
                       </div>
                       
-                      <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.8rem' }}>
+                      <div style={{ fontSize: '1rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
                         {job.message}
                       </div>
 
