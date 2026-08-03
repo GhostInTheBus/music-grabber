@@ -127,7 +127,6 @@ export default function Home() {
 
   return (
     <>
-      <div className="vine-overlay"></div>
       <BananaRain active={isDownloading} />
       
       {/* THE MONKEY CAR */}
@@ -139,16 +138,15 @@ export default function Home() {
         <div style={{ textAlign: 'center', marginBottom: '4rem', marginTop: '1.5rem', position: 'relative' }}>
           
           <motion.div
-            className="animate-swing"
             style={{ display: 'inline-block', fontSize: '6rem', marginBottom: '-20px', position: 'relative', zIndex: 5, filter: 'drop-shadow(0 10px 10px rgba(0,0,0,0.8))' }}
           >
             🦍
           </motion.div>
           
           <motion.h1
-            className="crazy-pulse"
             initial={{ y: -30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            animate={{ y: [0, -10, 0], opacity: 1 }}
+            transition={{ y: { duration: 2, repeat: Infinity, ease: 'easeInOut' } }}
             style={{ 
               fontSize: '5.5rem', 
               marginBottom: '1rem', 
@@ -174,11 +172,10 @@ export default function Home() {
               padding: '16px 30px',
               borderRadius: '20px',
               border: '3px dashed var(--primary-color)',
-              boxShadow: '4px 4px 0 var(--wood-dark)',
-              transform: 'rotate(1deg)'
+              boxShadow: '4px 4px 0 var(--wood-dark)'
             }}
           >
-            FEED THE PRIMATES A URL OR ARTIST NAME. THEY WILL BRING YOU THE LOOT! 🌴
+            FEED THE PRIMATES A YOUTUBE URL. THEY WILL BRING YOU THE LOOT! 🌴
           </motion.p>
         </div>
 
@@ -190,20 +187,20 @@ export default function Home() {
           >
             <div className="glass-panel" style={{ padding: '3.5rem' }}>
               <h2 style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '2.5rem', fontSize: '2.8rem', color: 'var(--primary-color)', textShadow: '3px 3px 0px var(--wood-dark)' }}>
-                <span className="animate-swing" style={{ display: 'inline-block', fontSize: '3rem' }}>🦧</span>
+                <span style={{ display: 'inline-block', fontSize: '3rem' }}>🦧</span>
                 TARGET
               </h2>
               <form onSubmit={handleDownload} className="flex-col" style={{ gap: '2.5rem' }}>
                 <div>
                   <label style={{ display: 'block', marginBottom: '1rem', color: 'var(--primary-color)', fontWeight: 800, fontSize: '1.4rem', textTransform: 'uppercase' }}>
-                    Artist Name or URL
+                    YouTube URL
                   </label>
                   <input
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     className="input-field"
-                    placeholder="e.g. 'Gorillaz' or URL..."
+                    placeholder="e.g. https://youtube.com/..."
                   />
                 </div>
                 
@@ -230,7 +227,7 @@ export default function Home() {
                   disabled={!query.trim()} 
                   style={{ width: '100%', marginTop: '1.5rem', padding: '24px' }}
                 >
-                  <span className="animate-swing" style={{ display: 'inline-block', fontSize: '2.2rem' }}>🦍</span>
+                  <span style={{ display: 'inline-block', fontSize: '2.2rem' }}>🦍</span>
                   DEPLOY THE PRIMATES!
                 </button>
               </form>
@@ -256,7 +253,7 @@ export default function Home() {
                       exit={{ opacity: 0 }}
                       style={{ textAlign: 'center', color: '#fff', padding: '5rem 2rem', fontWeight: 700, fontSize: '1.4rem', background: 'rgba(0,0,0,0.6)', borderRadius: '20px', border: '3px dashed var(--wood-light)' }}
                     >
-                      <div className="animate-swing" style={{ fontSize: '6rem', marginBottom: '1.5rem', display: 'inline-block' }}>💤🦧</div>
+                      <div style={{ fontSize: '6rem', marginBottom: '1.5rem', display: 'inline-block' }}>💤🦧</div>
                       <br/>
                       AWAITING ORDERS...
                     </motion.div>
@@ -282,7 +279,7 @@ export default function Home() {
                             {job.query}
                           </span>
                           <span style={{ fontSize: '2rem' }}>
-                            {job.status === 'downloading' && <span style={{ display: 'inline-block' }} className="animate-swing">🦍</span>}
+                            {job.status === 'downloading' && <span style={{ display: 'inline-block' }}>🦍</span>}
                             {job.status === 'completed' && <span>🦍✅</span>}
                             {job.status === 'error' && <span>🙊❌</span>}
                           </span>
