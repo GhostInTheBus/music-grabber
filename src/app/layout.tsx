@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Music Grabber',
-  description: 'A modern app to download audio tracks via yt-dlp',
+  title: 'JungleBeatz',
+  description: 'Feed the primates a URL. They will bring you the loot!',
 };
 
 export default function RootLayout({

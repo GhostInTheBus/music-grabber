@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
           if (mode === 'playlist' || mode === 'top10' || mode === 'top50') noPlaylist = false;
         }
 
-        let downloadsDir = path.join(os.homedir(), 'MusicDownloader');
+        let downloadsDir = path.join(os.homedir(), 'JungleBeatz');
         if (customPath) {
           if (customPath.startsWith('~/')) {
             downloadsDir = path.join(os.homedir(), customPath.slice(2));

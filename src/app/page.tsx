@@ -151,7 +151,7 @@ export default function Home() {
               zIndex: 10
             }}
           >
-            MONKEY GRABBER 🍌
+            JUNGLEBEATZ 🍌
           </motion.h1>
           
           <motion.p
