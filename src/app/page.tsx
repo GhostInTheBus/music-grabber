@@ -16,12 +16,12 @@ const BananaRain = ({ active }: { active: boolean }) => {
   const [bananas, setBananas] = useState<{ id: number; left: number; duration: number; delay: number }[]>([]);
 
   useEffect(() => {
-    // Only generate once so they don't re-render randomly
-    const newBananas = Array.from({ length: 40 }).map((_, i) => ({
+    // Generate chaotic bananas
+    const newBananas = Array.from({ length: 60 }).map((_, i) => ({
       id: i,
       left: Math.random() * 100,
-      duration: Math.random() * 3 + 2,
-      delay: Math.random() * 3
+      duration: Math.random() * 2 + 1,
+      delay: Math.random() * 2
     }));
     setBananas(newBananas);
   }, []);
@@ -66,7 +66,7 @@ export default function Home() {
       query: query.trim(),
       status: 'queued',
       progress: 0,
-      message: 'Swinging into action... 🐒',
+      message: 'PRIMATES DEPLOYED! 🦍🚀',
     };
 
     setJobs((prev) => [newJob, ...prev]);
@@ -114,7 +114,7 @@ export default function Home() {
       setJobs((prev) =>
         prev.map((job) =>
           job.id === newJob.id
-            ? { ...job, status: 'error', message: 'The monkeys failed to connect 🙊' }
+            ? { ...job, status: 'error', message: 'THE MONKEYS CRASHED THE CAR! 💥' }
             : job
         )
       );
@@ -130,25 +130,29 @@ export default function Home() {
       <div className="vine-overlay"></div>
       <BananaRain active={isDownloading} />
       
+      {/* THE MONKEY CAR */}
+      <div className={`monkey-car ${isDownloading ? 'driving' : ''}`}>
+        🚗🦍💨
+      </div>
+      
       <main className="container">
         <div style={{ textAlign: 'center', marginBottom: '4rem', marginTop: '1.5rem', position: 'relative' }}>
           
           <motion.div
             className="animate-swing"
-            style={{ display: 'inline-block', fontSize: '5rem', marginBottom: '-10px', position: 'relative', zIndex: 5, filter: 'drop-shadow(0 5px 10px rgba(0,0,0,0.6))' }}
+            style={{ display: 'inline-block', fontSize: '6rem', marginBottom: '-20px', position: 'relative', zIndex: 5, filter: 'drop-shadow(0 10px 10px rgba(0,0,0,0.8))' }}
           >
-            🐒
+            🦍
           </motion.div>
           
           <motion.h1
+            className="crazy-pulse"
             initial={{ y: -30, opacity: 0 }}
-            animate={{ y: [0, -10, 0], opacity: 1 }}
-            transition={{ y: { duration: 2, repeat: Infinity, ease: 'easeInOut' } }}
+            animate={{ y: 0, opacity: 1 }}
             style={{ 
-              fontSize: '4.5rem', 
+              fontSize: '5.5rem', 
               marginBottom: '1rem', 
               color: 'var(--primary-color)',
-              textShadow: '4px 4px 0px var(--wood-dark), 0 0 20px rgba(255,230,0,0.4)',
               position: 'relative',
               zIndex: 10
             }}
@@ -161,35 +165,37 @@ export default function Home() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2 }}
             style={{ 
-              color: '#fff', 
-              fontSize: '1.25rem', 
-              maxWidth: '650px', 
+              color: '#ffe600', 
+              fontSize: '1.4rem', 
+              maxWidth: '700px', 
               margin: '0 auto', 
-              fontWeight: 600,
-              background: 'rgba(0,0,0,0.4)',
-              padding: '12px 24px',
-              borderRadius: '16px',
-              border: '2px dashed var(--wood-light)'
+              fontWeight: 800,
+              background: 'rgba(0,0,0,0.7)',
+              padding: '16px 30px',
+              borderRadius: '20px',
+              border: '3px dashed var(--primary-color)',
+              boxShadow: '4px 4px 0 var(--wood-dark)',
+              transform: 'rotate(1deg)'
             }}
           >
-            Feed the monkeys an artist name or a YouTube link, and they'll swing by with high-quality audio tracks! 🌴
+            FEED THE PRIMATES A URL OR ARTIST NAME. THEY WILL BRING YOU THE LOOT! 🌴
           </motion.p>
         </div>
 
         <div className="grid-2">
           <motion.div
-            initial={{ x: -40, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ type: 'spring', bounce: 0.4, delay: 0.2 }}
+            initial={{ x: -100, opacity: 0, rotate: -5 }}
+            animate={{ x: 0, opacity: 1, rotate: 0 }}
+            transition={{ type: 'spring', bounce: 0.6, delay: 0.2 }}
           >
-            <div className="glass-panel" style={{ padding: '3rem' }}>
-              <h2 style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '2rem', fontSize: '2.2rem', color: 'var(--primary-color)', textShadow: '2px 2px 0px var(--wood-dark)' }}>
-                <span className="animate-swing" style={{ display: 'inline-block', fontSize: '2.5rem' }}>🦍</span>
-                New Safari
+            <div className="glass-panel" style={{ padding: '3.5rem' }}>
+              <h2 style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '2.5rem', fontSize: '2.8rem', color: 'var(--primary-color)', textShadow: '3px 3px 0px var(--wood-dark)' }}>
+                <span className="animate-swing" style={{ display: 'inline-block', fontSize: '3rem' }}>🦧</span>
+                TARGET
               </h2>
-              <form onSubmit={handleDownload} className="flex-col" style={{ gap: '2rem' }}>
+              <form onSubmit={handleDownload} className="flex-col" style={{ gap: '2.5rem' }}>
                 <div>
-                  <label style={{ display: 'block', marginBottom: '0.8rem', color: 'var(--primary-color)', fontWeight: 700, fontSize: '1.2rem', textTransform: 'uppercase' }}>
+                  <label style={{ display: 'block', marginBottom: '1rem', color: 'var(--primary-color)', fontWeight: 800, fontSize: '1.4rem', textTransform: 'uppercase' }}>
                     Artist Name or URL
                   </label>
                   <input
@@ -197,94 +203,93 @@ export default function Home() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     className="input-field"
-                    placeholder="e.g. 'Gorillaz' or https://youtube.com/..."
+                    placeholder="e.g. 'Gorillaz' or URL..."
                   />
                 </div>
                 
                 <div>
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.8rem', color: 'var(--primary-color)', fontWeight: 700, fontSize: '1.2rem', textTransform: 'uppercase' }}>
-                    <ListMusic size={22} />
-                    Bunch Size
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '1rem', color: 'var(--primary-color)', fontWeight: 800, fontSize: '1.4rem', textTransform: 'uppercase' }}>
+                    <ListMusic size={26} color="#ffe600" />
+                    BUNCH SIZE
                   </label>
                   <select
                     value={mode}
                     onChange={(e) => setMode(e.target.value)}
                     className="input-field"
-                    style={{ appearance: 'none' }}
                   >
-                    <option value="single">Single Banana 🍌 (1 Track)</option>
-                    <option value="top10">Small Bunch 🍌🍌 (Top 10)</option>
-                    <option value="top50">Big Bunch 🍌🍌🍌 (Top 50 / Discography)</option>
-                    <option value="playlist">Whole Tree 🌴 (Full Playlist URL)</option>
+                    <option value="single">ONE BANANA 🍌 (1 Track)</option>
+                    <option value="top10">HANDFUL 🍌🍌 (Top 10)</option>
+                    <option value="top50">BIG BUNCH 🍌🍌🍌 (Top 50)</option>
+                    <option value="playlist">WHOLE JUNGLE 🌴 (Playlist URL)</option>
                   </select>
                 </div>
 
                 <button 
                   type="submit" 
-                  className="button-primary" 
+                  className="button-primary crazy-pulse" 
                   disabled={!query.trim()} 
-                  style={{ width: '100%', marginTop: '1rem', padding: '20px' }}
+                  style={{ width: '100%', marginTop: '1.5rem', padding: '24px' }}
                 >
-                  <span className="animate-swing" style={{ display: 'inline-block', fontSize: '1.6rem' }}>🐒</span>
-                  Send Monkeys!
+                  <span className="animate-swing" style={{ display: 'inline-block', fontSize: '2.2rem' }}>🦍</span>
+                  DEPLOY THE PRIMATES!
                 </button>
               </form>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ x: 40, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ type: 'spring', bounce: 0.4, delay: 0.3 }}
+            initial={{ x: 100, opacity: 0, rotate: 5 }}
+            animate={{ x: 0, opacity: 1, rotate: 0 }}
+            transition={{ type: 'spring', bounce: 0.6, delay: 0.3 }}
           >
-            <div className="glass-panel" style={{ padding: '3rem', minHeight: '100%' }}>
-              <h2 style={{ marginBottom: '2rem', fontSize: '2.2rem', color: 'var(--primary-color)', textShadow: '2px 2px 0px var(--wood-dark)' }}>
-                Monkey Business 🍌
+            <div className="glass-panel" style={{ padding: '3.5rem', minHeight: '100%' }}>
+              <h2 style={{ marginBottom: '2.5rem', fontSize: '2.8rem', color: 'var(--primary-color)', textShadow: '3px 3px 0px var(--wood-dark)' }}>
+                THE LOOT 🍌
               </h2>
               
-              <div className="flex-col" style={{ gap: '1.5rem' }}>
+              <div className="flex-col" style={{ gap: '2rem' }}>
                 <AnimatePresence>
                   {jobs.length === 0 ? (
                     <motion.div
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      style={{ textAlign: 'center', color: '#fff', padding: '4rem 2rem', fontWeight: 600, fontSize: '1.2rem', background: 'rgba(0,0,0,0.4)', borderRadius: '16px', border: '2px dashed var(--wood-light)' }}
+                      style={{ textAlign: 'center', color: '#fff', padding: '5rem 2rem', fontWeight: 700, fontSize: '1.4rem', background: 'rgba(0,0,0,0.6)', borderRadius: '20px', border: '3px dashed var(--wood-light)' }}
                     >
-                      <div className="animate-swing" style={{ fontSize: '4.5rem', marginBottom: '1rem', display: 'inline-block' }}>💤🐒</div>
+                      <div className="animate-swing" style={{ fontSize: '6rem', marginBottom: '1.5rem', display: 'inline-block' }}>💤🦧</div>
                       <br/>
-                      The monkeys are sleeping. Give them a job!
+                      AWAITING ORDERS...
                     </motion.div>
                   ) : (
                     jobs.map((job) => (
                       <motion.div
                         key={job.id}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, scale: 0.8, rotate: -3 }}
+                        animate={{ opacity: 1, scale: 1, rotate: 0 }}
                         exit={{ opacity: 0, scale: 0.8 }}
                         style={{
-                          background: 'linear-gradient(to right, rgba(0,0,0,0.7), rgba(110, 64, 27, 0.5))',
-                          border: '2px solid var(--wood-light)',
-                          borderRadius: '16px',
-                          padding: '1.5rem',
+                          background: 'linear-gradient(to right, rgba(0,0,0,0.8), rgba(110, 64, 27, 0.7))',
+                          border: '4px solid var(--wood-light)',
+                          borderRadius: '20px',
+                          padding: '1.8rem',
                           position: 'relative',
                           overflow: 'hidden',
-                          boxShadow: '0 4px 15px rgba(0,0,0,0.4)'
+                          boxShadow: '0 8px 20px rgba(0,0,0,0.6)'
                         }}
                       >
-                        <div className="flex-between" style={{ marginBottom: '1rem' }}>
-                          <span style={{ fontWeight: 800, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '75%', fontSize: '1.2rem', color: 'var(--primary-color)', textShadow: '1px 1px 0px rgba(0,0,0,0.8)' }}>
+                        <div className="flex-between" style={{ marginBottom: '1.2rem' }}>
+                          <span style={{ fontWeight: 900, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '75%', fontSize: '1.4rem', color: 'var(--primary-color)', textShadow: '2px 2px 0px rgba(0,0,0,0.9)' }}>
                             {job.query}
                           </span>
-                          <span style={{ fontSize: '1.6rem' }}>
-                            {job.status === 'downloading' && <span style={{ display: 'inline-block' }} className="animate-swing">🐒</span>}
-                            {job.status === 'completed' && <CheckCircle2 size={24} color="var(--success-color)" />}
-                            {job.status === 'error' && <AlertCircle size={24} color="var(--error-color)" />}
+                          <span style={{ fontSize: '2rem' }}>
+                            {job.status === 'downloading' && <span style={{ display: 'inline-block' }} className="animate-swing">🦍</span>}
+                            {job.status === 'completed' && <span>🦍✅</span>}
+                            {job.status === 'error' && <span>🙊❌</span>}
                           </span>
                         </div>
                         
-                        <div style={{ fontSize: '1.05rem', color: '#fff', marginBottom: '1rem', fontWeight: 500 }}>
-                          {job.status === 'downloading' ? '🍌 Peeling audio...' : job.message}
+                        <div style={{ fontSize: '1.2rem', color: '#fff', marginBottom: '1.2rem', fontWeight: 700 }}>
+                          {job.status === 'downloading' ? '🍌 PEELING AUDIO...' : job.message}
                         </div>
 
                         {job.status === 'downloading' && (
