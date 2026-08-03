@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=Balsamiq+Sans:wght@700&display=swap');
 
 :root {
-  --bg-color: #16241a; /* Deeper Jungle Green */
-  --bg-gradient: radial-gradient(circle at top right, #203a27, #0d1610 70%);
+  --bg-color: #122116; /* Deepest Jungle Green */
+  --bg-gradient: radial-gradient(circle at top right, #1b3621, #0a140d 70%);
   --surface-color: rgba(255, 255, 255, 0.03);
-  --wood-light: #a66a38;
+  --wood-light: #b07541;
   --wood-dark: #6e401b;
   --primary-color: #ffe600; /* Banana Yellow */
-  --primary-glow: rgba(255, 230, 0, 0.4);
+  --primary-glow: rgba(255, 230, 0, 0.5);
   --secondary-color: #fca311; /* Ripe Orange/Yellow */
   --accent-color: #ffd000;
   --text-primary: #f8f9fa;
   --text-secondary: rgba(255, 255, 255, 0.7);
   --text-dark: #3b2313;
-  --error-color: #e63946;
+  --error-color: #ff4d4d;
   --success-color: #52b788;
-  --glass-bg: rgba(22, 36, 26, 0.85);
+  --glass-bg: rgba(18, 33, 22, 0.85);
   --radius-sm: 16px;
   --radius-md: 24px;
 }
@@ -24,20 +24,31 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* Fun Banana Cursor! */
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" style="font-size: 24px"><text y="24">🍌</text></svg>'), auto;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" style="font-size: 28px"><text y="28">🍌</text></svg>'), auto;
 }
 
 body {
   font-family: 'Outfit', sans-serif;
   background-color: var(--bg-color);
   background-image: 
-    radial-gradient(circle at 10% 20%, rgba(255, 230, 0, 0.03) 0%, transparent 40%),
+    repeating-radial-gradient(circle at center, transparent 0, rgba(0,0,0,0.1) 40px),
     var(--bg-gradient);
   background-attachment: fixed;
   color: var(--text-primary);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle Vine Border Overlay */
+.vine-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 60px rgba(0,255,0,0.05);
+  border: 15px dashed rgba(34, 139, 34, 0.15);
+  z-index: 100;
 }
 
 /* Typography */
@@ -49,7 +60,8 @@ h1, h2, h3 {
 
 h1 {
   text-transform: uppercase;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
+  text-shadow: 3px 3px 0 var(--wood-dark);
 }
 
 a {
@@ -62,26 +74,28 @@ a {
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 4px solid var(--wood-light);
+  border: 6px solid var(--wood-light);
   border-radius: var(--radius-md);
   box-shadow: 
-    0 15px 35px 0 rgba(0, 0, 0, 0.5),
-    inset 0 0 0 2px var(--wood-dark);
+    0 20px 40px 0 rgba(0, 0, 0, 0.7),
+    inset 0 0 0 3px var(--wood-dark);
+  position: relative;
+  z-index: 10;
 }
 
 .button-primary {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: var(--text-dark);
-  border: 3px solid var(--wood-dark);
-  padding: 16px 28px;
+  border: 4px solid var(--wood-dark);
+  padding: 18px 30px;
   border-radius: var(--radius-sm);
   font-family: 'Balsamiq Sans', cursive;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-  box-shadow: 0 6px 0 var(--wood-dark), 0 10px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 0 var(--wood-dark), 0 15px 25px rgba(0,0,0,0.5);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -89,45 +103,47 @@ a {
 }
 
 .button-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 0 var(--wood-dark), 0 15px 25px rgba(255, 230, 0, 0.2);
-  filter: brightness(1.05);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 0 var(--wood-dark), 0 20px 30px var(--primary-glow);
+  background: linear-gradient(135deg, #fff, var(--primary-color));
 }
 
 .button-primary:active {
-  transform: translateY(4px);
-  box-shadow: 0 2px 0 var(--wood-dark), 0 5px 10px rgba(0,0,0,0.2);
+  transform: translateY(6px);
+  box-shadow: 0 2px 0 var(--wood-dark), 0 5px 10px rgba(0,0,0,0.3);
 }
 
 .button-primary:disabled {
   opacity: 0.6;
-  transform: translateY(4px);
+  transform: translateY(6px);
   box-shadow: 0 2px 0 var(--wood-dark);
   cursor: not-allowed;
+  filter: grayscale(0.5);
 }
 
 .input-field {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.6);
   border: 3px dashed var(--wood-light);
   border-radius: var(--radius-sm);
   padding: 18px;
   color: var(--text-primary);
   font-family: 'Outfit', sans-serif;
-  font-size: 1.05rem;
-  font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 600;
   width: 100%;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .input-field:focus {
   outline: none;
   border: 3px solid var(--primary-color);
-  box-shadow: 0 0 15px rgba(255, 230, 0, 0.2);
-  background: rgba(255, 230, 0, 0.05);
+  box-shadow: 0 0 20px rgba(255, 230, 0, 0.4);
+  background: rgba(255, 230, 0, 0.1);
+  transform: scale(1.01);
 }
 
 .input-field::placeholder {
-  color: var(--text-secondary);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .input-field option {
@@ -135,20 +151,34 @@ a {
   color: var(--text-primary);
 }
 
+/* Banana Progress Bar */
 .progress-bar-container {
   width: 100%;
-  height: 12px;
-  background: rgba(0, 0, 0, 0.4);
+  height: 16px;
+  background: rgba(0, 0, 0, 0.6);
   border: 2px solid var(--wood-light);
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   margin-top: 12px;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .progress-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  background: repeating-linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--primary-color) 15px,
+    var(--secondary-color) 15px,
+    var(--secondary-color) 30px
+  );
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: moveStripes 1s linear infinite;
+}
+
+@keyframes moveStripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 42px 0; }
 }
 
 /* Animations */
@@ -161,14 +191,40 @@ a {
 }
 
 @keyframes swing {
-  0% { transform: rotate(-15deg); }
-  50% { transform: rotate(15deg); }
-  100% { transform: rotate(-15deg); }
+  0% { transform: rotate(-20deg); }
+  50% { transform: rotate(20deg); }
+  100% { transform: rotate(-20deg); }
 }
 
 .animate-swing {
   transform-origin: top center;
-  animation: swing 2s ease-in-out infinite;
+  animation: swing 1.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+/* Banana Rain System */
+.banana-rain-container {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.banana-rain-container.active {
+  opacity: 1;
+}
+
+.falling-banana {
+  position: absolute;
+  top: -100px;
+  font-size: 2.5rem;
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.5));
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100px) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(360deg); }
 }
 
 /* Layout */
@@ -176,17 +232,19 @@ a {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  position: relative;
+  z-index: 10;
 }
 
 .grid-2 {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2.5rem;
+  gap: 3rem;
 }
 
 @media (min-width: 800px) {
   .grid-2 {
-    grid-template-columns: 1.2fr 1fr;
+    grid-template-columns: 1.1fr 1fr;
   }
 }
 
