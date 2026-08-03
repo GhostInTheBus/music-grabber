@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
           '--audio-format', 'opus',
           '--audio-quality', '0',
           '--paths', downloadsDir,
-          '-o', '%(artist,uploader)s/%(title)s.%(ext)s',
+          '-o', '%(artist,uploader)s/%(album|Unknown Album)s/%(title)s.%(ext)s',
         ];
 
         if (noPlaylist) {
