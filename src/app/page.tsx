@@ -189,14 +189,14 @@ export default function Home() {
               <form onSubmit={handleDownload} className="flex-col" style={{ gap: '2.5rem' }}>
                 <div>
                   <label style={{ display: 'block', marginBottom: '1rem', color: 'var(--primary-color)', fontWeight: 800, fontSize: '1.4rem', textTransform: 'uppercase' }}>
-                    YouTube URL
+                    YouTube URL or Artist Name
                   </label>
                   <input
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     className="input-field"
-                    placeholder="e.g. https://youtube.com/..."
+                    placeholder="e.g. https://youtube.com/... or 'Artist Name'"
                   />
                 </div>
                 
