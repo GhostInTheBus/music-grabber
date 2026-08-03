@@ -221,13 +221,39 @@ export default function Home() {
                   <label style={{ display: 'block', marginBottom: '1rem', color: 'var(--primary-color)', fontWeight: 800, fontSize: '1.4rem', textTransform: 'uppercase' }}>
                     SAVE TO DIRECTORY (Optional)
                   </label>
-                  <input
-                    type="text"
-                    value={downloadPath}
-                    onChange={(e) => setDownloadPath(e.target.value)}
-                    className="input-field"
-                    placeholder="e.g. ~/Music/Jungle Beatz"
-                  />
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <input
+                      type="text"
+                      value={downloadPath}
+                      onChange={(e) => setDownloadPath(e.target.value)}
+                      className="input-field"
+                      placeholder="e.g. ~/Music/Jungle Beatz"
+                    />
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        try {
+                          const res = await fetch('/api/dialog');
+                          const data = await res.json();
+                          if (data.path) setDownloadPath(data.path);
+                        } catch (err) {}
+                      }}
+                      style={{
+                        background: 'var(--wood-light)',
+                        color: 'var(--text-dark)',
+                        border: '3px solid var(--wood-dark)',
+                        borderRadius: '20px',
+                        padding: '0 20px',
+                        cursor: 'pointer',
+                        fontFamily: 'Bangers, cursive',
+                        fontSize: '1.4rem',
+                        textTransform: 'uppercase',
+                        minWidth: '120px'
+                      }}
+                    >
+                      Browse...
+                    </button>
+                  </div>
                 </div>
 
                 <button 
