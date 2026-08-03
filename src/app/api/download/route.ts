@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
-    const { query, id, mode = 'single' } = await req.json();
+    const { query, id, mode = 'single', customPath } = await req.json();
 
     if (!query) {
       return new Response('Missing query', { status: 400 });
@@ -33,7 +33,15 @@ export async function POST(req: NextRequest) {
           if (mode === 'playlist' || mode === 'top10' || mode === 'top50') noPlaylist = false;
         }
 
-        const downloadsDir = path.join(os.homedir(), 'MusicDownloader');
+        let downloadsDir = path.join(os.homedir(), 'MusicDownloader');
+        if (customPath) {
+          if (customPath.startsWith('~/')) {
+            downloadsDir = path.join(os.homedir(), customPath.slice(2));
+          } else {
+            downloadsDir = path.resolve(customPath);
+          }
+        }
+        
         if (!fs.existsSync(downloadsDir)) {
           fs.mkdirSync(downloadsDir, { recursive: true });
         }
@@ -75,7 +83,7 @@ export async function POST(req: NextRequest) {
 
         child.on('close', (code) => {
           if (code === 0) {
-            sendUpdate({ status: 'completed', progress: 100, message: 'Download finished! Check your MusicDownloader folder.' });
+            sendUpdate({ status: 'completed', progress: 100, message: `Download finished! Check ${downloadsDir}` });
           } else {
             sendUpdate({ status: 'error', progress: 0, message: `Process exited with code ${code}. Is yt-dlp installed?` });
           }

@@ -49,6 +49,7 @@ const BananaRain = ({ active }: { active: boolean }) => {
 
 export default function Home() {
   const [query, setQuery] = useState('');
+  const [downloadPath, setDownloadPath] = useState('');
   const [mode, setMode] = useState('single');
   const [jobs, setJobs] = useState<DownloadJob[]>([]);
   const [isClient, setIsClient] = useState(false);
@@ -76,7 +77,7 @@ export default function Home() {
       const response = await fetch('/api/download', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: newJob.query, id: newJob.id, mode }),
+        body: JSON.stringify({ query: newJob.query, id: newJob.id, mode, customPath: downloadPath }),
       });
 
       if (!response.ok) {
@@ -214,6 +215,19 @@ export default function Home() {
                     <option value="top50">BIG BUNCH 🍌🍌🍌 (Top 50)</option>
                     <option value="playlist">WHOLE JUNGLE 🌴 (Playlist URL)</option>
                   </select>
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', marginBottom: '1rem', color: 'var(--primary-color)', fontWeight: 800, fontSize: '1.4rem', textTransform: 'uppercase' }}>
+                    SAVE TO DIRECTORY (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    value={downloadPath}
+                    onChange={(e) => setDownloadPath(e.target.value)}
+                    className="input-field"
+                    placeholder="e.g. ~/Music/Jungle Beatz"
+                  />
                 </div>
 
                 <button 
